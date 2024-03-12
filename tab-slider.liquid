@@ -67,7 +67,7 @@
     {% for product in block.settings.collection.products %}
       <div class="box">
         <h3>{{ product.title }}</h3>
-        <img src="{{ product.image.src | img_url: 'medium' }}" alt="{{ product.title }}">
+        <img src="{{ product.featured_image | img_url: '600x600' }}" alt="{{product.featured_image.alt}}" />
       </div>
     {% endfor %}
   </div>
