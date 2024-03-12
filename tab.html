@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tabbed Content with Slider</title>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.css"/>
+<style>
+  /* Styles for tabs */
+  .tabs {
+    display: flex;
+    justify-content: space-around;
+    list-style: none;
+    padding: 0;
+  }
+  .tabs li {
+    cursor: pointer;
+    padding: 10px 20px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px 5px 0 0;
+  }
+  .tabs li.active {
+    background-color: #ccc;
+  }
+  .tab-content {
+    display: none;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-top: none;
+  }
+  .box {
+    width: 100px;
+    height: 100px;
+    background-color: #ccc;
+    margin: 10px;
+  }
+  /* Styles for Slick slider arrows */
+  .slick-prev, .slick-next {
+    position: absolute;
+    top: 50%;
+    z-index: 1;
+    width: 30px;
+    height: 30px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .slick-prev {
+    left: 10px;
+  }
+  .slick-next {
+    right: 10px;
+  }
+</style>
+</head>
+<body>
+
+<ul class="tabs">
+  <li class="tab-link" data-tab="tab-1">Tab 1</li>
+  <li class="tab-link" data-tab="tab-2">Tab 2</li>
+  <li class="tab-link" data-tab="tab-3">Tab 3</li>
+</ul>
+
+<div id="tab-1" class="tab-content">
+  <div class="slider">
+    <div class="box">Box 1</div>
+    <div class="box">Box 2</div>
+    <div class="box">Box 3</div>
+    <div class="box">Box 4</div>
+    <div class="box">Box 5</div>
+    <div class="box">Box 6</div>
+    <div class="box">Box 7</div>
+    <div class="box">Box 8</div>
+    <div class="box">Box 9</div>
+  </div>
+</div>
+
+<div id="tab-2" class="tab-content">
+  <div class="slider">
+    <div class="box">Box 10</div>
+    <div class="box">Box 11</div>
+    <div class="box">Box 12</div>
+    <div class="box">Box 13</div>
+    <div class="box">Box 14</div>
+    <div class="box">Box 15</div>
+    <div class="box">Box 16</div>
+    <div class="box">Box 17</div>
+    <div class="box">Box 18</div>
+  </div>
+</div>
+
+<div id="tab-3" class="tab-content">
+  <div class="slider">
+    <div class="box">Box 19</div>
+    <div class="box">Box 20</div>
+    <div class="box">Box 21</div>
+    <div class="box">Box 22</div>
+    <div class="box">Box 23</div>
+    <div class="box">Box 24</div>
+    <div class="box">Box 25</div>
+    <div class="box">Box 26</div>
+    <div class="box">Box 27</div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
+<script>
+  $(document).ready(function(){
+    $(".tab-link").click(function(){
+      var tab_id = $(this).attr("data-tab");
+      
+      $(".tab-link").removeClass("active");
+      $(".tab-content").hide();
+      
+      $(this).addClass("active");
+      $("#"+tab_id).fadeIn();
+
+      // Initialize Slick slider
+      $("#"+tab_id+" .slider").slick({
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        prevArrow: '<button type="button" class="slick-prev">&#10094;</button>',
+        nextArrow: '<button type="button" class="slick-next">&#10095;</button>',
+        responsive: [
+          {
+            breakpoint: 768,
+            settings: {
+              slidesToShow: 2
+            }
+          },
+          {
+            breakpoint: 480,
+            settings: {
+              slidesToShow: 1
+            }
+          }
+        ]
+      });
+    });
+
+    // Show the first tab content by default
+    $(".tab-link:first").click();
+  });
+</script>
+
+</body>
+</html>
